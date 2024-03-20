@@ -1,52 +1,129 @@
-let trainer = {
-    name: `Kaatori`,
-    age: 19,
-    pokemonList: [],
-
-    addPokemon: function(pokemon) {
-        this.pokemonList.push(pokemon);
-        console.log(`${pokemon.name} added to ${this.name}'s team!`);
+class Pokemon{
+    constructor(name, sprite,hp,moves){
+        this.name=name;
+        this.sprite=sprite;
+        this.hp=hp;
+        this.fullhp=hp;
+        this.moves=moves;
     }
-};
+}
+let pkmList=[
+    [`Charizard`,`https://img.pokemondb.net/sprites/black-white/anim/normal/charizard.gif`, 360, 
+    [`Flamethrower`,`fire`,95,0.95]
+    [`Dragon Claw`,`dragon`,80,0.95]
+    [`Air Slash`,`flying`,75,0.85]
+    [`Slash`,`normal`,70,0.85]
+    ],
 
-function Pokemon(name, level, health, attack) {
-    this.name = name;
-    this.level = level;
-    this.health = health;
-    this.attack = attack;
+    [`Blastoise`,`https://img.pokemondb.net/sprites/black-white/anim/normal/blastoise.gif`, 490, 
+    [`Surf`,`water`,90,0.95]
+    [`Crunch`,`normal`,80,0.95]
+    [`Ice Punch`,`ice`,75,0.95]
+    [`Flash Cannon`,`steel`,80,0.95]
+    ],
+
+    [`Venusaur`,`https://img.pokemondb.net/sprites/black-white/anim/normal/venusaur.gif`, 590, 
+    [`Petal Blizzard`,`grass`,95,0.95]
+    [`Sludge Bomb`,`poison`,90,0.95]
+    [`Earthquake`,`ground`,100,0.95]
+    [`Body Slam`,`normal`,85,0.95]
+    ],
+];
+let typeMatch={
+    'Charizard':[['ground'],['water','rock'],['fire','grass','steel']],
+    'Blastoise':[['water'],['grass'],['fire','water']],
+    'Venusaur':[['poison'],['fire','flying','ice','steel'],['grass','water']],
 }
 
-Pokemon.prototype.attackOpponent = function(opponent) {
-    console.log(`${this.name} tackles ${opponent.name}!`);
-    opponent.health -= this.attack; 
-    console.log(`${opponent.name}'s health reduced to ${opponent.health}`);
-};
+function spawn(bool){
+    let p=pkmList[Math.floor(Math.random()*pkmList.length)];
+    let pkm=new Pokemon(p[0],p[1],p[2],p[3]);
 
-let snorlax = new Pokemon(`Snorlax`, 10, 500, 75);
-let charmander = new Pokemon(`Charmander`, 5, 100, 50);
-let squirtle = new Pokemon(`Squirtle`, 5, 100, 50);
+    if(bool){
+        for(i=0;i<4;i++){
+            document.getElementById(`m`+i).value=pkm.moves[i][0];
+        }
+        return pkm;
+    }
+}
+let pk1=spawn(true);
+s1=document.createElement('img');;
+s1.src=pk1.sprite;
+document.getElementById('pk1').appendChild(s1);
+document.getElementById('hp1').innerHTML=`<p>HP: `+pk1.hp+` / `+pk1.fullhp+`</p>`;
 
-setTimeout(() => console.log(`A wild ${charmander.name} and ${squirtle.name} appeared!`), 500);
-setTimeout(() => console.log(charmander), 1000);
-setTimeout(() => console.log(squirtle), 1250);
-setTimeout(() => console.log(`\n${trainer.name} sent out ${snorlax.name}`), 1500);
-setTimeout(() => console.log(snorlax), 2000);
-setTimeout(() => console.log(`\nBattle!\n`), 2250);
-setTimeout(() => charmander.attackOpponent(snorlax), 2500);
-setTimeout(() => squirtle.attackOpponent(snorlax), 3000);
-setTimeout(() => snorlax.attackOpponent(charmander), 4000);
-setTimeout(() => snorlax.attackOpponent(squirtle), 5000);
-setTimeout(() => console.log(`\n${trainer.name} attempted to catch ${charmander.name} and ${squirtle.name}...`), 6000);
-setTimeout(() => console.log(`Success!\n`), 6500);
+let pk2=spawn(false);
+s2=document.createElement('img');;
+s2.src=pk2.sprite;
+document.getElementById('pk2').appendChild(s2);
+document.getElementById('hp2').innerHTML=`<p>HP: `+pk2.hp+` / `+pk2.fullhp+`</p>`;
 
-setTimeout(() => {
-    trainer.addPokemon(snorlax);
-    trainer.addPokemon(charmander);
-    trainer.addPokemon(squirtle);    
-},7000)
-setTimeout(() => {
-    console.log(`\nTrainer Information:`);
-    console.log(`Trainer Name: ${trainer['name']}`);
-    console.log(`Trainer Age: ${trainer['age']}`);
-    console.log(`Pokemon Owned: ${trainer['pokemonList'].length}`);
-}, 7500);
+for(i=0;i<4;i++){
+    let btn=document.getElementById(`m`+i);
+    let move=pk1.moves[i];
+    function addHandler(btn,move,pk1,pk2){
+        btn.addEventListener('click',function(e){
+            attack(move,pk1,pk2,`hp2`,``);
+            setTimeout(attack,2000,pk2.moves[Math.floor(Math.random()*3)],pk2,pk1,`hp1`,`Foe `);
+        });
+    }
+    addHandler(btn,move,pk1,pk2);
+}
+
+function attack(move, attacker, reciever, hp, owner){
+    document.getElementById('comment').innerHTML='<p>'+owner+attacker.name+'used'+move[0]+'!</p>';
+    if(Math.random()<move[4]){
+        let power=move[2]+Math.floor(Math.random()*10);
+        let rtype=typeMatch[receiver.name];
+        let mtype=move[1];
+        let scale=1;
+
+        for(i=1<rtype.length; i++;){
+            if(rtype[i].include(mtype)){
+                switch(i){
+                    case 0:
+                        scale=0;
+                        setTimeout(function(){
+                            document.getElementById('comment').innerHTML='<p>It had no effect!</p>';
+                        }, 1000);
+                        break;
+                    case 1:
+                        scale=2;
+                        setTimeout(function(){
+                            document.getElementById('comment').innerHTML ='<p>It was super effective!</p>';
+                        }, 1000);
+                        break;
+                    case 2:
+                        scale=0.5;
+                        setTimeout(function(){
+                            document.getElementById('comment').innerHTML ='<p>It was not very effective!</p>';
+                        }, 1000);
+                        break;
+                }
+                break;
+            }
+        }
+        power *= scale;
+        receiver.hp-=Math.floor(power);
+        document.getElementById(hp).innerHTML ='<p>HP: '+receiver.hp+' / '+ receiver.fullhp+'</p>';
+    }
+    else{
+        setTimeout(function(){
+            document.getElementById('comment').innerHTML='<p>Attack missed!</p>';
+        })
+    }
+    checkWinner(hp)
+
+}
+
+
+function checkWinner(hp){
+    let f=(pk1.hp<=0) ? pk1 : (pk2.hp<=0) ? pk2 : false;
+    if(f!=false){
+        alert('GAME OVER: '+f.name+' fainted!');
+        document.getElementById(hp).innerHTML='<p>HP: 0/'+f.fullhp+'</p';
+        setTimeout(function(){
+            location.reload;
+        }, 1500)
+    }
+}
