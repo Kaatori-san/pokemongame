@@ -70,10 +70,60 @@ for(i=0;i<4;i++){
     addHandler(btn,move,pk1,pk2);
 }
 
-function attack(){
-    
+function attack(move, attacker, reciever, hp, owner){
+    document.getElementById('comment').innerHTML='<p>'+owner+attacker.name+'used'+move[0]+'!</p>';
+    if(Math.random()<move[4]){
+        let power=move[2]+Math.floor(Math.random()*10);
+        let rtype=typeMatch[receiver.name];
+        let mtype=move[1];
+        let scale=1;
+
+        for(i=1<rtype.length; i++;){
+            if(rtype[i].include(mtype)){
+                switch(i){
+                    case 0:
+                        scale=0;
+                        setTimeout(function(){
+                            document.getElementById('comment').innerHTML='<p>It had no effect!</p>';
+                        }, 1000);
+                        break;
+                    case 1:
+                        scale=2;
+                        setTimeout(function(){
+                            document.getElementById('comment').innerHTML ='<p>It was super effective!</p>';
+                        }, 1000);
+                        break;
+                    case 2:
+                        scale=0.5;
+                        setTimeout(function(){
+                            document.getElementById('comment').innerHTML ='<p>It was not very effective!</p>';
+                        }, 1000);
+                        break;
+                }
+                break;
+            }
+        }
+        power *= scale;
+        receiver.hp-=Math.floor(power);
+        document.getElementById(hp).innerHTML ='<p>HP: '+receiver.hp+' / '+ receiver.fullhp+'</p>';
+    }
+    else{
+        setTimeout(function(){
+            document.getElementById('comment').innerHTML='<p>Attack missed!</p>';
+        })
+    }
+    checkWinner(hp)
+
 }
 
-function checkWinner(){
-    
+
+function checkWinner(hp){
+    let f=(pk1.hp<=0) ? pk1 : (pk2.hp<=0) ? pk2 : false;
+    if(f!=false){
+        alert('GAME OVER: '+f.name+' fainted!');
+        document.getElementById(hp).innerHTML='<p>HP: 0/'+f.fullhp+'</p';
+        setTimeout(function(){
+            location.reload;
+        }, 1500)
+    }
 }
