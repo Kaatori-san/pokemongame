@@ -57,7 +57,6 @@ function spawn(bool) {
 const pk1 = spawn(true);
 const s1 = document.createElement('img');
 s1.src = pk1.sprite;
-let pk1=spawn(true);
 s1=document.createElement('img');
 s1.src=pk1.sprite;
 s1.width = 400; 
@@ -65,11 +64,9 @@ s1.height = 400;
 document.getElementById('pk1').appendChild(s1);
 document.getElementById('hp1').innerHTML = '<p>HP: ' + pk1.hp + ' / ' + pk1.fullhp + '</p>';
 
-
 const pk2 = spawn(false);
 const s2 = document.createElement('img');
 s2.src = pk2.sprite;
-let pk2=spawn(false);
 s2=document.createElement('img');
 s2.src=pk2.sprite;
 s2.width = 400; 
