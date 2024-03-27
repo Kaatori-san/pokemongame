@@ -16,7 +16,7 @@ p {
 }
 
 body {
-    background: url(Images/pokemon-battle-background.png) no-repeat center center/cover;
+    background: url(images/pokemon-battle-background.png) no-repeat center center/cover;
     background-size: cover;
     min-height: 100vh;
     display: flex;
