@@ -14,7 +14,7 @@ const pkmList = [
           ['Flamethrower', 'fire', 95, 0.95],
           ['Dragon Claw', 'dragon', 80, 0.95],
           ['Air Slash', 'fly', 75, 0.85],
-          ['Slash', 'normal', 70, 0.95],
+          ['Tackle', 'normal', 70, 0.95],
       ]
   ],
   ['Blastoise', 'https://img.pokemondb.net/sprites/black-white/anim/normal/blastoise.gif', 362,
