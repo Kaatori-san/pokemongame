@@ -13,7 +13,7 @@ let pkmList = [
     ['Flamethrower', 'fire', 95, 0.95],
     ['Dragon Claw', 'dragon', 80, 0.95],
     ['Air Slash', 'fly', 75, 0.85],
-    ['Slash', 'normal', 70, ],
+    ['Slash', 'normal', 70, 0.95],
   ]
   ],
   
@@ -74,7 +74,7 @@ for(i=0;i<4;i++){
       attack(move,pk1,pk2,'hp2','');
       setTimeout(attack,2000,pk2.moves[Math.floor(Math.random()*3)],pk2,pk1,'hp1','Foe ');
     });
-    
+
   }
   addHandler(btn,move,pk1,pk2);
 }
@@ -114,21 +114,21 @@ function attack(move,attacker,receiver,hp,owner){
       }
       power*=scale;
       receiver.hp-=Math.floor(power);
-      document.getElementById(hp).innerHTML='<p>HP: '+receiver.jp+' / '+receiver.fullhp+'</p>'
+      document.getElementById(hp).innerHTML='<p>HP: '+receiver.hp+' / '+receiver.fullhp+'</p>'
   }
   else{
     setTimeout(function(){
-      document.getElementById('comment').innerHTML='<p>Attack missed!</p';
-    })
+      document.getElementById('comment').innerHTML='<p>It had no effect!</p>';
+    },1000)
   }
   checkWinner(hp);
 }
   
 function checkWinner(hp){
-  let=f (pk1.hp<=0)?pk1:(pk2.hp<=0)?pk2:false
-  if(f!=false){
-    alert('GAME OVER: '+f.name+' fainted!');
+  let f=(pk1.hp<=0)?pk1:(pk2.hp<=0)?pk2:false
+  if(f!==false){
     document.getElementById(hp).innerHTML='<p>HP: 0/'+f.fullhp+'</p>'
+    alert('GAME OVER: '+f.name+' fainted!');
     setTimeout(function(){
       location.reload;
     },1500)
