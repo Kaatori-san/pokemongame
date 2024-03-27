@@ -53,24 +53,17 @@ function spawn(bool) {
   return pkm;
 }
 
-
 const pk1 = spawn(true);
 const s1 = document.createElement('img');
 s1.src = pk1.sprite;
-s1=document.createElement('img');
-s1.src=pk1.sprite;
-s1.width = 400; 
-s1.height = 400;
+s1.classList.add('pokemon-image'); // Add a class for styling
 document.getElementById('pk1').appendChild(s1);
 document.getElementById('hp1').innerHTML = '<p>HP: ' + pk1.hp + ' / ' + pk1.fullhp + '</p>';
 
 const pk2 = spawn(false);
 const s2 = document.createElement('img');
 s2.src = pk2.sprite;
-s2=document.createElement('img');
-s2.src=pk2.sprite;
-s2.width = 400; 
-s2.height = 400;
+s2.classList.add('pokemon-image'); // Add a class for styling
 document.getElementById('pk2').appendChild(s2);
 document.getElementById('hp2').innerHTML = '<p>HP: ' + pk2.hp + ' / ' + pk2.fullhp + '</p>';
 
@@ -114,21 +107,12 @@ function calculateEffectiveness(moveType, receiverName) {
           switch (i) {
               case 0:
                   effectiveness = 0;
-                  setTimeout(function(){
-                    document.getElementById('comment').innerHTML = '<p>It had no effect!</p>';
-                  },1000)
                   break;
               case 1:
                   effectiveness = 2;
-                  setTimeout(function(){
-                    document.getElementById('comment').innerHTML = '<p>It was super effective!</p>';
-                  },1000)
                   break;
               case 2:
                   effectiveness = 0.5;
-                  setTimeout(function(){
-                    document.getElementById('comment').innerHTML = '<p>It was not very effective...</p>';
-                  },1000)
                   break;
           }
           break;
@@ -144,10 +128,10 @@ function calculatePower(basePower, effectiveness) {
 function checkWinner(hp) {
   const f = (pk1.hp <= 0) ? pk1 : (pk2.hp <= 0) ? pk2 : false;
   if (f !== false) {
-    document.getElementById(hp).innerHTML = '<p>HP: 0/' + f.fullhp + '</p>';
-    alert('GAME OVER: ' + f.name + ' fainted!');
-    setTimeout(()=>{
-        location.reload();
-      },1500);
+      document.getElementById(hp).innerHTML = '<p>HP: 0/' + f.fullhp + '</p>';
+      alert('GAME OVER: ' + f.name + ' fainted!');
+      setTimeout(() => {
+          location.reload();
+      }, 1500);
   }
 }
