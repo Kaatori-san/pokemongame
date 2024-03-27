@@ -13,11 +13,11 @@ let pkmList = [
     ['Flamethrower', 'fire', 95, 0.95],
     ['Dragon Claw', 'dragon', 80, 0.95],
     ['Air Slash', 'fly', 75, 0.85],
-    ['Slash', 'normal', 70, 0.85],
+    ['Slash', 'normal', 70, ],
   ]
   ],
   
-  ['Blastoise', 'https://img.pokemondb.net/sprites/black-white/anim/normal/blastoise.gif', 490,
+  ['Blastoise', 'https://img.pokemondb.net/sprites/black-white/anim/normal/blastoise.gif', 362,
   [
     ['Surf', 'water', 90, 0.95],
     ['Crunch', 'normal', 80, 0.95],
@@ -26,9 +26,9 @@ let pkmList = [
   ]
   ],
   
-  ['Venusaur', 'https://img.pokemondb.net/sprites/black-white/anim/normal/venusaur.gif', 590,
+  ['Venusaur', 'https://img.pokemondb.net/sprites/black-white/anim/normal/venusaur.gif', 364,
   [
-    ['Petal Blizzard', 'grass', 95, 0.95],
+    ['Petal Blizzard', 'grass', 90, 0.95],
     ['Sludge Bomb', 'poison', 90, 0.95],
     ['Earthquake', 'ground', 100, 0.95],
     ['Body Slam', 'normal', 85, 0.95],
@@ -60,7 +60,7 @@ s1.src=pk1.sprite;
 document.getElementById('pk1').appendChild(s1);
 document.getElementById('hp1').innerHTML='<p>HP: '+pk1.hp+' / '+pk1.fullhp+'</p>';
 
-let pk2=spawn(true);
+let pk2=spawn(false);
 s2=document.createElement('img');
 s2.src=pk2.sprite;
 document.getElementById('pk2').appendChild(s2);
@@ -74,63 +74,63 @@ for(i=0;i<4;i++){
       attack(move,pk1,pk2,'hp2','');
       setTimeout(attack,2000,pk2.moves[Math.floor(Math.random()*3)],pk2,pk1,'hp1','Foe ');
     });
+    
   }
   addHandler(btn,move,pk1,pk2);
 }
 
 function attack(move,attacker,receiver,hp,owner){
   document.getElementById('comment').innerHTML='<p>'+owner+attacker.name+' used '+move[0]+'!</p>';
-
   if(Math.random()<move[3]){
     let power=move[2]+=Math.floor(Math.random()*10);
     let rtype=typeMatch[receiver.name];
-    let mytype=move[1];
-    let scape=1;
+    let mtype=move[1];
+    let scale=1;
 
     for(i=0;i<rtype.length;i++){
-      if(rtype[i].includes(mytype)){
+      if(rtype[i].includes(mtype)){
         switch(i){
           case 0:
             scale=0;
             setTimeout(function(){
               document.getElementById('comment').innerHTML='<p>It had no effect!</p>';
-            },1000)
+            },1000);
             break;
-          case 1:
-            scale=2;
-            setTimeout(function(){
-              document.getElementById('comment').innerHTML='<p>It was super effective!</p>';
-            },1000)
-            break;
-          case 2:
-            scale=0.5;
-            setTimeout(function(){
-              document.getElementById('comment').innerHTML='<p>It was not very effective!</p>';
-            },1000)
-            break;
+            case 1:
+              scale=2;
+              setTimeout(function(){
+                document.getElementById('comment').innerHTML='<p>It was super effective!</p>';
+              },1000);
+              break;
+            case 2:
+              scale=0.5;
+              setTimeout(function(){
+                document.getElementById('comment').innerHTML='<p>It was not very effective!</p>';
+              },1000);
+              break;
+            }
+            break
         }
-        break;
       }
-    }
-    power*=scale;
+      power*=scale;
       receiver.hp-=Math.floor(power);
-      document.getElementById(hp).innerHTML='<p>HP: '+receiver.hp+' / '+receiver.fullhp+'</p>';
-  }else{
+      document.getElementById(hp).innerHTML='<p>HP: '+receiver.jp+' / '+receiver.fullhp+'</p>'
+  }
+  else{
     setTimeout(function(){
-      document.getElementById('comment').innerHTML='<p>Attack missed!</p>';
+      document.getElementById('comment').innerHTML='<p>Attack missed!</p';
     })
   }
   checkWinner(hp);
 }
   
 function checkWinner(hp){
-  let f=(pk1.hp<=0)?pk1:(pk2.hp<0)?pk2:false;
+  let=f (pk1.hp<=0)?pk1:(pk2.hp<=0)?pk2:false
   if(f!=false){
     alert('GAME OVER: '+f.name+' fainted!');
-    document.getElementById(hp).innerHTML='<p>HP: 0/'+f.fullhp+'</p>';
+    document.getElementById(hp).innerHTML='<p>HP: 0/'+f.fullhp+'</p>'
     setTimeout(function(){
       location.reload;
     },1500)
+  } 
   }
-
-}
