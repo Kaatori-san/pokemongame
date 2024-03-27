@@ -14,7 +14,7 @@ const pkmList = [
           ['Flamethrower', 'fire', 95, 0.95],
           ['Dragon Claw', 'dragon', 80, 0.95],
           ['Air Slash', 'fly', 75, 0.85],
-          ['Slash', 'normal', 70, 0.95],
+          ['Tackle', 'normal', 70, 0.95],
       ]
   ],
   ['Blastoise', 'https://img.pokemondb.net/sprites/black-white/anim/normal/blastoise.gif', 362,
@@ -105,12 +105,21 @@ function calculateEffectiveness(moveType, receiverName) {
           switch (i) {
               case 0:
                   effectiveness = 0;
+                  setTimeout(function(){
+                    document.getElementById('comment').innerHTML = '<p>It had no effect!</p>';
+                  },1000)
                   break;
               case 1:
                   effectiveness = 2;
+                  setTimeout(function(){
+                    document.getElementById('comment').innerHTML = '<p>It was super effective!</p>';
+                  },1000)
                   break;
               case 2:
                   effectiveness = 0.5;
+                  setTimeout(function(){
+                    document.getElementById('comment').innerHTML = '<p>It was not very effective...</p>';
+                  },1000)
                   break;
           }
           break;
@@ -126,10 +135,10 @@ function calculatePower(basePower, effectiveness) {
 function checkWinner(hp) {
   const f = (pk1.hp <= 0) ? pk1 : (pk2.hp <= 0) ? pk2 : false;
   if (f !== false) {
-      document.getElementById(hp).innerHTML = '<p>HP: 0/' + f.fullhp + '</p>';
-      alert('GAME OVER: ' + f.name + ' fainted!');
-      setTimeout(() => {
-          location.reload();
-      }, 1500);
+    document.getElementById(hp).innerHTML = '<p>HP: 0/' + f.fullhp + '</p>';
+    alert('GAME OVER: ' + f.name + ' fainted!');
+    setTimeout(()=>{
+        location.reload();
+      },1500);
   }
 }
