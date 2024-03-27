@@ -1,26 +1,43 @@
-/* css reset */
-*{
+/* CSS Reset */
+* {
     padding: 0;
     box-sizing: border-box;
-}
-th,td{
-    margin:auto;
-    padding: 5px;
-}
-p{
     font-family: consolas;
+}
+
+th, td {
+    margin-top: 10px;
+    margin: auto;
+    padding: 3%;
+}
+
+p {
     text-align: center;
 }
 
-body{
-    background: url(images/pokemon-battle-background.png) no-repeat center center/cover;
-    height: 100vh;
+body {
+    background: url(Images/pokemon-battle-background.png) no-repeat center center/cover;
+    background-size: cover;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
+.pokemon-image {
+    width: 100%;
+    height: auto;
+    max-width: 400px;
+}
 
+#hp1, #hp2 {
+    color: #f2f2f2;
+    font-weight: 700;
+    font-size: 2vw;
+}
+#comment {
+    color: #f2f2f2;
+}
 #pk1 {
     transform: scaleX(-1);
 }
@@ -29,8 +46,9 @@ body{
     display: block;
     width: 100%;
     padding: 25px;
+    padding-right: 250px;
     margin: 25px;
-    font-size: 1em;
+    font-size: 2em;
     text-align: center;
     cursor: pointer;
     background-color: #f2f2f2;
@@ -47,10 +65,14 @@ body{
 
 @media screen and (min-width: 768px) {
     .btn {
-        width: 200px;
+        width: 40%;
     }
+    #hp1, #hp2 {
+        font-size: 1vw;
+    }
+
 }
 
-img{
-    margin-left: 50px;
+img {
+    margin-left: 5%;
 }
