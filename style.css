@@ -1,0 +1,56 @@
+/* css reset */
+*{
+    padding: 0;
+    box-sizing: border-box;
+}
+th,td{
+    margin:auto;
+    padding: 5px;
+}
+p{
+    font-family: consolas;
+    text-align: center;
+}
+
+body{
+    background: url(Images/pokemon-battle-background.png) no-repeat center center/cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#pk1 {
+    transform: scaleX(-1);
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 25px;
+    margin: 25px;
+    font-size: 1em;
+    text-align: center;
+    cursor: pointer;
+    background-color: #f2f2f2;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+.btn-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+}
+
+@media screen and (min-width: 768px) {
+    .btn {
+        width: 200px;
+    }
+}
+
+img{
+    margin-left: 50px;
+}
